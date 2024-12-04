@@ -152,7 +152,7 @@ export default function Home() {
         <View className=''>
 
           <View className='flex-row px-5 py-2 items-center space-x-2'>
-            <Text className='flex-1 font-extrabold text-lg'> Acessos Rápidos</Text>
+            <Text className='flex-1 font-extrabold text-lg dark:text-white'> Acessos Rápidos</Text>
           </View>
 
           <View className='p-5  flex-row  gap-4 flex-wrap'>

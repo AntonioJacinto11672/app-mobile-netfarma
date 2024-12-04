@@ -10,7 +10,7 @@ const HomeScreen = () => {
     }
     return (
         <>
-           <Redirect href={"/home/PromotionScreen"} />
+           <Redirect href={"/home/ProductScreen"} />
         </>
     )
 }

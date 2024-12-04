@@ -14,10 +14,12 @@ export default function ProductCard(props: ProductCardProps) {
     return (
         <>
             <View className='bg-gray-50  items-center shadow-sm rounded-lg mr-5 '>
-                <Image
+               <TouchableOpacity>
+                 <Image
                     source={props.urlImg}
-                    className='w-40 h-40 p-5 bg-gray-100 opacity-1 rounded-lg mb-4'
+                    className='w-40 h-40 p-3 bg-gray-100 opacity-1 rounded-lg mb-4'
                 />
+               </TouchableOpacity>
                 <View className=''>
                     <Text className='font-bold text-md'> {props.title} </Text>
                     <Text className='text-gray-500 text-sm w-28'> {truncateText(props.description)} </Text>

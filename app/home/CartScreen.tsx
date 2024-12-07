@@ -59,7 +59,7 @@ export default function CartScreen() {
         </View>
 
         <View>
-          <Text>Components</Text>
+          {/* <Text>Components</Text> */}
           {components[valueComponent]}
         </View>
       </ScrollView>

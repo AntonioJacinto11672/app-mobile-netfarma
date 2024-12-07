@@ -95,9 +95,7 @@ export default function IconVectorComponent(props: CustomProps) {
                 <AntDesign name={icon.value.name} size={icon.size} color={icon.color} />
             )}
 
-            {icon.value.type === IconType.AntDesignIcon && (
-                <AntDesign name={icon.value.name} size={icon.size} color={icon.color} />
-            )}
+         
             {icon.value.type === IconType.EntypoIcon && (
                 <Entypo name={icon.value.name} size={icon.size} color={icon.color} />
             )}

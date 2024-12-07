@@ -15,9 +15,9 @@ export default function CartScreen() {
   const [valueComponent, setValueComponent] = useState<number>(0)
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className='bg-white h-screen'>
       <SearchComponent />
-      <ScrollView>
+      <ScrollView className=''>
 
         <View className=' flex-row  justify-between items-center  border-b border-gray-200 my-4 px-5'>
           <TouchableOpacity className={`flex-row items-center gap-2   ${valueComponent === 0 ? 'border-b-2 border-[#00665e]' : ''}`} onPress={() => setValueComponent(0)}>

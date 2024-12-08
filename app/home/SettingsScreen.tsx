@@ -4,8 +4,14 @@ import { ChevronDownIcon, UserIcon } from 'react-native-heroicons/solid'
 import IconVectorComponent, { IconType } from '@/components/IconVectorComponent'
 import ListItemsSettings from '@/components/ListItemsSettings'
 import TitleCategories from '@/components/card/TitleCategories'
+import { useRouter } from 'expo-router'
+
 
 export default function SettingsScreen() {
+  const router = useRouter()
+  const logout = () => {
+
+  }
   return (
     <SafeAreaView className='bg-white '>
       <ScrollView className='flex flex-col '>
@@ -44,7 +50,7 @@ export default function SettingsScreen() {
 
           }} />
 
-          {/*  <TitleCategories title='Netfrma - saúde em um cick'  onPress={() => {}}/> */}
+        
 
           <Text className='px-5 mt-10 mb-5 text-xl'>Netfarma - saúde em um click</Text>
 
@@ -56,7 +62,9 @@ export default function SettingsScreen() {
             size: 22,
             color: "#00665e"
 
-          }} /> <ListItemsSettings title='Obter direção' icon={{
+          }} /> 
+          
+          <ListItemsSettings title='Obter direção' icon={{
             value: {
               type: IconType.EntypoIcon,
               name: "location-pin"
@@ -149,22 +157,20 @@ export default function SettingsScreen() {
           <ListItemsSettings title='Poíica de privacidade' icon={{
             value: {
               type: IconType.FontAwesome5Icon,
-              name: "laptop-medical"
+              name: "unlock"
             },
             size: 22,
             color: "#00665e"
           }} />
 
+       
 
 
-
-
-
-
-
-
-
-
+          <View>
+            <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => router.push('/LoginScreen')}>
+              <Text className='font-extrabold text-center text-white text-md'>Terminar sessão</Text>
+            </TouchableOpacity>
+          </View>
 
         </View>
       </ScrollView>

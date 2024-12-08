@@ -11,6 +11,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import IconVectorComponent, { IconType } from '@/components/IconVectorComponent';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -24,8 +25,8 @@ export default function TabLayout() {
         tabBarBackground: TabBarBackground,
         tabBarStyle: {
         }
-      
-        
+
+
       }}>
       <Tabs.Screen
         name="index"
@@ -35,36 +36,37 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='PromotionScreen'
+        name="PromotionScreen"
         options={{
-          title: 'Promoções',
-          tabBarIcon: ({ color }) => <> <MaterialCommunityIcons name="brightness-percent" size={24} color={color} /></>
+          title: 'Promoção',
+          tabBarIcon: ({ color }) => <IconVectorComponent icon={{ value: { type: IconType.MaterialCommunityIcon, name: 'brightness-percent' }, size: 28, color: color }} />,
         }}
       />
-       <Tabs.Screen
-        name='ProductScreen'
+
+      <Tabs.Screen
+        name="ProductScreen"
         options={{
           title: 'Produtos',
-          tabBarIcon: ({ color }) => <> <Fontisto name="pills" size={24} color={color} /></>
+          tabBarIcon: ({ color }) => <IconVectorComponent icon={{ value: { type: IconType.FontistoIcon, name: 'pills' }, size: 28, color: color }} />,
         }}
       />
+
       <Tabs.Screen
-        name='CartScreen'
+        name="CartScreen"
         options={{
           title: 'Carrinho',
-          tabBarIcon: ({ color }) => <><Entypo name="shopping-cart" size={24} color={color} /></>
+          tabBarIcon: ({ color }) => <IconVectorComponent icon={{ value: { type: IconType.EntypoIcon, name: 'shopping-cart' }, size: 28, color: color }} />,
         }}
       />
+
 
       <Tabs.Screen
-        name='SettingsScreen'
+        name="SettingsScreen"
         options={{
-          title: 'Definições',
-          tabBarIcon: ({ color }) => <><MaterialIcons name="settings" size={24} color={color} /></>
+          title: 'Menu',
+          tabBarIcon: ({ color }) => <IconVectorComponent icon={{ value: { type: IconType.MaterialIcon, name: 'settings' }, size: 28, color: color }} />,
         }}
       />
-
-
 
     </Tabs>
   );

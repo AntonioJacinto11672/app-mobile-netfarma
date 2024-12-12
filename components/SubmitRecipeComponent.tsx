@@ -10,6 +10,7 @@ const star = "star";
 
 interface Props extends CustomProps {
     text: string,
+    onPress?: () => void,
 }
 
 const SubmitRecipeComponent = (props: Props) => {

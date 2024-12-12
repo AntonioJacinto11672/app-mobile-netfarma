@@ -13,7 +13,7 @@ import PostCard from '@/components/card/PostCard';
 
 export default function Home() {
   return (
-    <View className='pt-5 mt-7 bg-white dark:bg-black h-full'>
+    <SafeAreaView className='pt-5 mt-7 bg-white dark:bg-black h-full'>
       <View className="flex-row pb-3 items-center mx-4 space-x-2 ">
         <Image
           source={{
@@ -261,6 +261,6 @@ export default function Home() {
 
 
 
-    </View>
+    </SafeAreaView>
   )
 }

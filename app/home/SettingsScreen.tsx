@@ -50,7 +50,7 @@ export default function SettingsScreen() {
 
           }} />
 
-        
+
 
           <Text className='px-5 mt-10 mb-5 text-xl'>Netfarma - saúde em um click</Text>
 
@@ -62,8 +62,8 @@ export default function SettingsScreen() {
             size: 22,
             color: "#00665e"
 
-          }} /> 
-          
+          }} />
+
           <ListItemsSettings title='Obter direção' icon={{
             value: {
               type: IconType.EntypoIcon,
@@ -162,9 +162,6 @@ export default function SettingsScreen() {
             size: 22,
             color: "#00665e"
           }} />
-
-       
-
 
           <View>
             <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => router.push('/LoginScreen')}>

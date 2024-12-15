@@ -16,7 +16,7 @@ interface Props extends CustomProps {
 const SubmitRecipeComponent = (props: Props) => {
     return (
         <>
-            <TouchableOpacity className='content-center  items-center my-2'>
+            <TouchableOpacity className='content-center  items-center my-2' onPress={props.onPress}>
                 <View className='bg-gray-200 dark:bg-slate-800 p-4 rounded-full my-2'>
                     {/* <MaterialIcons name={iconName} size={24} color="#00665e" /> */}
                     {/*  <IconVectorComponent icon={{value: {type: IconType.FontAwesomeIcon, name: 'search'}, size: 22, color: "#0022ff"}} /> */}

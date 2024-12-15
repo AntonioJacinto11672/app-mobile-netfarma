@@ -27,7 +27,7 @@ export default function RootLayout() {
     return null;
   }
 
-  return (<>
+  return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false, title: "HomeScreen" }} />
@@ -38,6 +38,5 @@ export default function RootLayout() {
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
-  </>
   );
 }

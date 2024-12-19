@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import '../global.css'
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -28,15 +30,17 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false, title: "HomeScreen" }} />
-        <Stack.Screen name="LoginScreen" options={{ headerShown: false, title: "Login" }} />
-        <Stack.Screen name="RegisterScreen" options={{ headerShown: false, title: "Register" }} />
-        <Stack.Screen name="home" options={{ headerShown: false, title: "Register" }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false, title: "HomeScreen" }} />
+          <Stack.Screen name="LoginScreen" options={{ headerShown: false, title: "Login" }} />
+          <Stack.Screen name="RegisterScreen" options={{ headerShown: false, title: "Register" }} />
+          <Stack.Screen name="home" options={{ headerShown: false, title: "Register" }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </Provider>
   );
 }

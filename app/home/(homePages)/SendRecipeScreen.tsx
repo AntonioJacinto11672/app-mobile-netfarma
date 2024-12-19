@@ -1,3 +1,6 @@
+{/* 
+  Os state não funcionam para navegar entre componentes no mobile
+*/}
 import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from 'expo-router'
@@ -25,7 +28,7 @@ export default function SendRecipeScreen() {
   const componetComparticipation: any[] = [
     <CompartipactionSystemFalse />,
     <CompartipactionSystemTrue />,
-   
+
   ]
 
   /* Valores dos componentes */
@@ -117,9 +120,10 @@ export default function SendRecipeScreen() {
             </View> */}
 
             <MainForButtonComponent>
-              <MainButtonItem title='Não'  componentMainState={compartipactionSystemValue === 0 ? true : false} onPress={() => setCompartipactionSystemValue(0)} />
-              <MainButtonItem title='Sim'  componentMainState={compartipactionSystemValue === 1 ? true : false} onPress={() => setCompartipactionSystemValue(1)} />
+              <MainButtonItem title='Não' componentMainState={compartipactionSystemValue === 0 ? true : false} onPress={() => setCompartipactionSystemValue(0)} />
+              <MainButtonItem title='Sim' componentMainState={compartipactionSystemValue === 1 ? true : false} onPress={() => setCompartipactionSystemValue(1)} />
             </MainForButtonComponent>
+
 
             <View className='my-5'>
 

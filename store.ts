@@ -1,9 +1,11 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import CounterSlice from "./features/CounterSlice"
+import componentMainValue from "./features/SendRecipeSlice"
 
 export const store = configureStore({
     reducer: {
-        counter: CounterSlice
+        counter: CounterSlice,
+        componentMain: componentMainValue 
     }
 })
 

@@ -16,6 +16,11 @@ import CompartipactionSystemTrue from '@/components/submitRecipes/Compartipactio
 import CompartipactionSystemFalse from '@/components/submitRecipes/CompartipactionSystemFalse'
 
 
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import { decremented, incremented } from '@/features/CounterSlice';
+import { setcomponentMainValue } from '@/features/SendRecipeSlice';
+
+
 export default function SendRecipeScreen() {
   const navigation = useNavigation()
 
@@ -34,6 +39,15 @@ export default function SendRecipeScreen() {
   /* Valores dos componentes */
   const [componentMainValue, setComponentSetMainValue] = useState<number>(0)
   const [compartipactionSystemValue, setCompartipactionSystemValue] = useState<number>(0)
+
+
+
+
+
+  const value = useAppSelector((state) => state.componentMain.value)
+  const dispatch = useAppDispatch()
+  
+  console.log("Value", value)
 
   return (
     <SafeAreaView>
@@ -83,17 +97,27 @@ export default function SendRecipeScreen() {
             />
 
             <MainForButtonComponent>
-              <MainButtonItem title='SMS' componentMainState={componentMainValue == 0 ? true : false} onPress={() => setComponentSetMainValue(0)} />
-              <MainButtonItem title='Fotografia' componentMainState={componentMainValue == 1 ? true : false} onPress={() => setComponentSetMainValue(1)} />
-              <MainButtonItem title='Código' componentMainState={componentMainValue == 2 ? true : false} onPress={() => setComponentSetMainValue(2)} />
+              <MainButtonItem title='SMS' componentMainState={value == 0 ? true : false} onPress={() => { }} />
+              <MainButtonItem title='Fotografia' componentMainState={value == 1 ? true : false} onPress={() => { }} />
+              <MainButtonItem title='Código' componentMainState={value == 2 ? true : false} onPress={() => dispatch(setcomponentMainValue(2))} />
             </MainForButtonComponent>
 
             {/* Content first - COnteudo principal */}
 
+            <View className='mx-auto flex-row gap-3 my-auto items-center'>
+              <TouchableOpacity className='bg-blue-800 p-3 rounded-lg font-medium hover:bg-blue-900' onPress={() => dispatch(setcomponentMainValue(1))}>
+                <Text className='text-white'>Mais</Text>
+              </TouchableOpacity>
+              <Text> {value}  </Text>
+              <TouchableOpacity className='bg-blue-800 p-3 rounded-lg font-medium hover:bg-blue-900' onPress={() => dispatch(setcomponentMainValue(0))}>
+                <Text className='text-white'>Menos</Text>
+              </TouchableOpacity>
+            </View>
+
             <View className='mb-5'>
               {/* input with label input com label  */}
 
-              {componentMain[componentMainValue]}
+              {componentMain[value]}
             </View>
 
 

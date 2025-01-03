@@ -57,7 +57,7 @@ export default function Home() {
             <SubmitRecipeComponent text='Receitas e Requisições' icon={{
               size: 22, color: "#00665e",
               value: { type: IconType.FontAwesome5Icon, name: 'notes-medical' }
-            }} onPress={() => { router.push("/home/(homePages)/RecipeRequestScreen") }} key={3} />
+            }} onPress={() => { router.push("/home/CartScreen") }} key={3} />
 
             <SubmitRecipeComponent text='Medições de Saúde' icon={{
               size: 22, color: "#00665e",

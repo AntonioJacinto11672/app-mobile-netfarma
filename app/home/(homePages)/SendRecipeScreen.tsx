@@ -26,7 +26,10 @@ const SendRecipeScreen = () => {
 
   const componetComparticipation: any[] = [
     <CompartipactionSystemFalse />,
-    <CompartipactionSystemTrue />,
+    <View>
+      <CompartipactionSystemTrue />
+      <CompartipactionSystemFalse />
+    </View>,
 
   ]
 
@@ -114,21 +117,7 @@ const SendRecipeScreen = () => {
             </View>
 
 
-            {/*  <View className='bg-gray-100 p-2 rounded-lg'>
-              
-              <View className='flex-row justify-around gap-2 items-center'>
-                <TouchableOpacity className=' '>
-                  <Text className='upercase'>Não</Text>
-                </TouchableOpacity>
 
-
-
-                <TouchableOpacity className='bg-white shadow rounded-lg px-12 py-2'>
-                  <Text className='font-bold uppercase'>Sim</Text>
-                </TouchableOpacity>
-              </View>
-
-            </View> */}
 
             <MainForButtonComponent>
               <MainButtonItem title='Não' componentMainState={compartipactionSystemValue === 0 ? true : false} onPress={() => setCompartipactionSystemValue(0)} />
@@ -140,12 +129,12 @@ const SendRecipeScreen = () => {
 
               {componetComparticipation[compartipactionSystemValue]}
 
+
+
               <View>
-                <View className='mb-10'>
-                  <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg disabled:text-gray-200' onPress={() => { }}>
-                    <Text className='font-extrabold text-center text-white text-md'>Submeter pré-encomenda</Text>
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg disabled:text-gray-200' onPress={() => { }}>
+                  <Text className='font-extrabold text-center text-white text-md'>Submeter pré-encomenda</Text>
+                </TouchableOpacity>
               </View>
             </View>
 

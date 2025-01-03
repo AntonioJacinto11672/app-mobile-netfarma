@@ -137,7 +137,7 @@ export default function RequestScreen() {
 
           <BoxText text='Pode consultar o estado da sua pré-encomneda e adicioná-las ao carrinho em: Menu - Requisições de produtos' />
 
-                  <ButtonLargeOpacity text='Submeter pré-encomenda'  />
+          <ButtonLargeOpacity text='Submeter pré-encomenda' />
         </View>
 
 

@@ -51,7 +51,7 @@ const SendRecipeScreen = () => {
 
 
   return (
-    <SafeAreaView className=' h-full'>
+    <SafeAreaView className='h-full'>
       <View className='bg-[#00665e] p-5 '>
         <View className='flex-row mt-10 '>
           <TouchableOpacity
@@ -70,23 +70,23 @@ const SendRecipeScreen = () => {
             title='Submeter Receita Médica'
             description='Envie a Sua Receita Médica'
             stateNumber={1}
-            state
+            active={true}
           />
 
           <SubmitRecipeItem
-            title='Submeter Receita Médica'
-            description='Envie a Sua Receita Médica'
-            stateNumber={1}
+            title='Aguardar valor'
+            description='Aguardar um preço para esse Valor'
+            stateNumber={2}
           />
 
           <SubmitRecipeItem
-            title='Submeter Receita Médica'
-            description='Envie a Sua Receita Médica'
-            stateNumber={1}
+            title='Adicionar ao carrinho'
+            description='Adicionar ao carrinho e clonclua a encomedna'
+            stateNumber={3}
           />
         </View>
 
-        <View className='bg-white h-screen'>
+        <View className='bg-white'>
           {/* content */}
           <View className='m-5'>
 
@@ -125,7 +125,7 @@ const SendRecipeScreen = () => {
             </MainForButtonComponent>
 
 
-            <View className='my-5'>
+            <View className=''>
 
               {componetComparticipation[compartipactionSystemValue]}
 

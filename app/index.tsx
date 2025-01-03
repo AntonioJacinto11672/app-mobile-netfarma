@@ -8,7 +8,7 @@ const HomeScreen = () => {
     if (login) {
         return <Redirect href={"/home"} />
     }
-    return (<Redirect href={"/home/SendRecipeScreen"} />
+    return (<Redirect href={"/home"} />
     )
 }
 

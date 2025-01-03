@@ -65,7 +65,7 @@ export type CustomProps = {
 
 }
 
-export default function IconVectorComponent(props: CustomProps) {
+export default function     IconVectorComponent(props: CustomProps) {
     const { icon, ...otherProps } = props;
     return (
         <>

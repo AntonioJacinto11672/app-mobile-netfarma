@@ -27,12 +27,7 @@ export default function ListItemsSettings(props: ListItemsSettingsProps) {
                
             </TouchableOpacity>
             
-            {/*  <TouchableOpacity className='content-center  items-center my-2'>
-                <View className='bg-gray-200 dark:bg-slate-800 p-4 rounded-full my-2'>
-                    <IconVectorComponent icon={props.icon} />
-                </View>
-                <Text className='text-center items-center justify-center text-xs text-gray-500 font-medium w-24'> {props.text} </Text>
-            </TouchableOpacity> */}
+          
         </>
     )
 }

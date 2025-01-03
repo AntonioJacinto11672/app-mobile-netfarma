@@ -41,14 +41,14 @@ const SendRecipeScreen = () => {
   }, [componentMainValue])
 
 
- 
+
 
   const value = useAppSelector((state) => state.componentMain.value)
   const dispatch = useAppDispatch()
 
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className=' h-full'>
       <View className='bg-[#00665e] p-5 '>
         <View className='flex-row mt-10 '>
           <TouchableOpacity
@@ -94,13 +94,13 @@ const SendRecipeScreen = () => {
 
             <MainForButtonComponent>
               <MainButtonItem title='SMS' componentMainState={componentMainValue === 0 ? true : false} onPress={() => { setComponentMainValue(0) }} />
-              <MainButtonItem title='Fotografia' componentMainState={componentMainValue === 1 ? true : false} onPress={() => { setComponentMainValue (1)}} />
+              <MainButtonItem title='Fotografia' componentMainState={componentMainValue === 1 ? true : false} onPress={() => { setComponentMainValue(1) }} />
               <MainButtonItem title='Código' componentMainState={componentMainValue == 2 ? true : false} onPress={() => { setComponentMainValue(2) }} />
             </MainForButtonComponent>
 
             {/* Content first - COnteudo principal */}
 
-       
+
             <View className='mb-5'>
               {/* input with label input com label  */}
 
@@ -141,9 +141,11 @@ const SendRecipeScreen = () => {
               {componetComparticipation[compartipactionSystemValue]}
 
               <View>
-                <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg disabled:text-gray-200' onPress={() => { }}>
-                  <Text className='font-extrabold text-center text-white text-md'>Submeter pré-encomenda</Text>
-                </TouchableOpacity>
+                <View className='mb-10'>
+                  <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg disabled:text-gray-200' onPress={() => { }}>
+                    <Text className='font-extrabold text-center text-white text-md'>Submeter pré-encomenda</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
 

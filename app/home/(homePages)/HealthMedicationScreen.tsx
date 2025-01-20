@@ -26,7 +26,7 @@ const HealthMedicationScreen = () => {
           </View>
 
           <View className='  bg-gray-200 my-5   p-3 text-lg  rounded-lg'>
-            <Text className='text-lg'> Leia os termos e condições e aceita se deseja que a fármacia consiga Adicionar e gerir estas informações, <Link href={'..'} className='underline'>clicando aqui.</Link>   </Text>
+            <Text className='text-lg'> Leia os termos e condições e aceita se deseja que a fármacia consiga Adicionar e gerir estas informações, <Link href={'/home/(homePages)/helthMedicine/PolitciAndTerms'} className='underline'>clicando aqui.</Link>   </Text>
           </View>
         </ScrollView>
 

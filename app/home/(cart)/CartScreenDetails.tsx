@@ -11,7 +11,7 @@ const components:any = [
   <EncomendaComponent />
 ]
 
-export default function CartScreen() {
+export default function CartScreenDetails() {
   const [valueComponent, setValueComponent] = useState<number>(0)
 
   return (

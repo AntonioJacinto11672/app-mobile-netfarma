@@ -53,7 +53,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="CartScreen"
+        name="(cart)"
         options={{
           title: 'Carrinho',
           tabBarIcon: ({ color }) => <IconVectorComponent icon={{ value: { type: IconType.EntypoIcon, name: 'shopping-cart' }, size: 28, color: color }} />,

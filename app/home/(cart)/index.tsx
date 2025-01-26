@@ -6,6 +6,7 @@ import CartComponent from '@/components/CartComponentes/CartComponent'
 import OrderComponent from '@/components/CartComponentes/OrderComponent'
 import EncomendaComponent from '@/components/CartComponentes/EncomendaComponent'
 import TouchableFixed from '@/components/ui/TouchableFixed'
+import HomeHeader from '@/components/ui/HomeHeader'
 const components: any = [
   <CartComponent />,
   <OrderComponent />,
@@ -17,7 +18,11 @@ export default function CartScreen() {
 
   return (
     <SafeAreaView className='bg-white h-full'>
-      <SearchComponent />
+      <HomeHeader title='Carrinho' />
+
+      <View className='bg-gray-100 '>
+        <SearchComponent />
+      </View>
       <ScrollView className=''>
 
         <View className=' flex-row justify-between items-center  border-b border-gray-200 my-4 px-5'>

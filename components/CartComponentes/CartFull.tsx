@@ -69,20 +69,7 @@ export default function CartFull() {
 
                     {/* Valores */}
 
-                    <View className='mx-5 mt-10'>
-                        <View className='flex-row justify-between items-center'>
-                            <Text className='text-lg text-gray-500'>Subtotal</Text>
-                            <Text className='text-lg text-gray-500'> {FormatPrice(1000)} </Text>
-                        </View>
-                        <View className='flex-row justify-between items-center'>
-                            <Text className='text-lg text-gray-500'>Entrega</Text>
-                            <Text className='text-lg text-gray-500'> {FormatPrice(0)} </Text>
-                        </View>
-                        <View className='flex-row justify-between items-center'>
-                            <Text className='text-lg font-bold'>Total (IVA inc.)</Text>
-                            <Text className='text-lg'> {FormatPrice(1000)} </Text>
-                        </View>
-                    </View>
+                   
                 </View>
             </ScrollView>
 

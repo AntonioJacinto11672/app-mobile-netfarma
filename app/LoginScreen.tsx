@@ -42,18 +42,18 @@ const LoginScreen = () => {
         <View className='form space-y-2'>
           <Text className='text-gray-700 ml-4'>Email Address </Text>
           <TextInput className='p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3'
-             placeholder='Enter Email'
+            placeholder='Enter Email'
 
           />
 
           <Text className='text-gray-700 ml-4'>Password </Text>
           <TextInput className='p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3'
-             placeholder='Enter Email' secureTextEntry 
+            placeholder='Enter Email' secureTextEntry
           />
           <TouchableOpacity className='flex items-end mb-5 '>
             <Text className='text-gray-700'>Forgot Password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity className='py-3 bg-yellow-400 rounded-xl' onPress={() => { router.push("/home")}}>
+          <TouchableOpacity className='py-3 bg-yellow-400 rounded-xl' onPress={() => { router.push("/home") }}>
             <Text className='font-xl font-bold text-center text-gray-700'>Login</Text>
           </TouchableOpacity>
 

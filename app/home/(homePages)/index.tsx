@@ -32,17 +32,19 @@ export default function Home() {
           />
 
           <View className="flex-1">
-            <Text className="font-bold text-gray-400 text-xs">Delivery Now!</Text>
-            <Text className="font-bold text-xl">Current Location
-              <ChevronDownIcon color={"#00665e"} size={20} />
-            </Text>
+            <TouchableOpacity>
+              <Text className="font-bold text-gray-400 text-xs">Entrega Agora!</Text>
+              <Text className="font-bold text-xl">Localização actual
+                <ChevronDownIcon color={"#00665e"} size={20} />
+              </Text>
+            </TouchableOpacity>
           </View>
 
           <UserIcon size={35} color={"#00665e"} />
         </View>
 
 
-        <ScrollView>
+        <ScrollView className='bg-gray-50'>
           <View className='flex-row justify-around px-1 mx-2'>
             <SubmitRecipeComponent text='Enviar Receita Médica' icon={{
               size: 22, color: "#00665e",
@@ -57,7 +59,7 @@ export default function Home() {
             <SubmitRecipeComponent text='Receitas e Requisições' icon={{
               size: 22, color: "#00665e",
               value: { type: IconType.FontAwesome5Icon, name: 'notes-medical' }
-            }} onPress={() => { router.push("/home/CartScreen") }} key={3} />
+            }} onPress={() => { router.push("/home/(cart)") }} key={3} />
 
             <SubmitRecipeComponent text='Medições de Saúde' icon={{
               size: 22, color: "#00665e",

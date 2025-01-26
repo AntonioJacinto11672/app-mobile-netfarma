@@ -1,18 +1,23 @@
-import { View, Text, SafeAreaView, TextInput, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { AdjustmentsHorizontalIcon, MagnifyingGlassIcon } from 'react-native-heroicons/solid'
+import { AdjustmentsHorizontalIcon, MagnifyingGlassIcon, XCircleIcon } from 'react-native-heroicons/solid'
 import TitleCategories from '@/components/card/TitleCategories'
 import PostCard from '@/components/card/PostCard'
 import ProductCard from '@/components/card/ProductCard'
 import SearchComponent from '@/components/SearchComponent'
+import HomeHeader from '@/components/ui/HomeHeader'
 
 export default function PromotionScreen() {
   return (
-    <SafeAreaView>
+    <SafeAreaView className='bg-white'>
       {/* Search */}
-      <SearchComponent />
+      <HomeHeader title='Promoções' />
 
-      <ScrollView>
+      <View className='bg-gray-100 '>
+        <SearchComponent />
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false} className='bg-gray-100'>
         {/* Post - Publicações */}
         <View className=''>
           {/* Title */}

@@ -5,13 +5,18 @@ import TitleCategories from '@/components/card/TitleCategories'
 import SearchComponent from '@/components/SearchComponent'
 import SubmitRecipeComponent from '@/components/SubmitRecipeComponent'
 import { IconType } from '@/components/IconVectorComponent'
+import HomeHeader from '@/components/ui/HomeHeader'
 
 export default function ProductScreen() {
   return (
-    <SafeAreaView>
-      <SearchComponent />
+    <SafeAreaView className='bg-white'>
+      <HomeHeader title='Produto' />
 
-      <ScrollView>
+      <View className='bg-gray-100 '>
+        <SearchComponent />
+      </View>
+
+      <ScrollView className='bg-gray-100'>
 
         {/* Menu de Receitas */}
         <ScrollView
@@ -21,7 +26,7 @@ export default function ProductScreen() {
             paddingVertical: 1
           }}
           showsHorizontalScrollIndicator={false}
-          className=''
+          className='bg-gray-100'
         >
           <SubmitRecipeComponent text='Bebé e mamã' icon={{ value: { type: IconType.FontAwesome6Icon, name: 'comment-medical' }, size: 22, color: "#00665e" }} />
           <SubmitRecipeComponent text='Cosmética' icon={{ value: { type: IconType.FontAwesome5Icon, name: 'laptop-medical' }, size: 22, color: "#00665e" }} />

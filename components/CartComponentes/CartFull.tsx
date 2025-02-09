@@ -69,7 +69,6 @@ export default function CartFull() {
 
                     {/* Valores */}
 
-                   
                 </View>
             </ScrollView>
 

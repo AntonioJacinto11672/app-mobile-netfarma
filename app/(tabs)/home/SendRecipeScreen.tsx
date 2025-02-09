@@ -1,27 +1,20 @@
-{/* 
-  Os state não funcionam para navegar entre componentes no mobile
-*/}
-import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
-import { ArrowLeftIcon } from 'react-native-heroicons/solid'
-import SubmitRecipeItem from '@/components/submitRecipes/SubmitRecipeItem'
-import TitleAndDecriptionSubmit from '@/components/submitRecipes/TitleAndDecriptionSubmit'
 import SmsContentComponent from '@/components/submitRecipes/content/SmsContentComponent'
 import FotografiaComponent from '@/components/submitRecipes/content/FotografiaComponent'
 import CodigoContentComponent from '@/components/submitRecipes/content/CodigoContentComponent'
+import CompartipactionSystemFalse from '@/components/submitRecipes/CompartipactionSystemFalse'
+import CompartipactionSystemTrue from '@/components/submitRecipes/CompartipactionSystemTrue'
+import { ArrowLeftIcon } from 'react-native-heroicons/solid'
+import SubmitRecipeItem from '@/components/submitRecipes/SubmitRecipeItem'
 import MainForButtonComponent from '@/components/submitRecipes/MainForButtonComponent'
 import MainButtonItem from '@/components/submitRecipes/MainButtonItem'
-import CompartipactionSystemTrue from '@/components/submitRecipes/CompartipactionSystemTrue'
-import CompartipactionSystemFalse from '@/components/submitRecipes/CompartipactionSystemFalse'
+import TitleAndDecriptionSubmit from '@/components/submitRecipes/TitleAndDecriptionSubmit'
 
 
-import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
-import { decremented, incremented } from '@/features/CounterSlice';
-import { setcomponentMainValue } from '@/features/SendRecipeSlice';
-
-
-export default function SendRecipeScreen() {
+const SendRecipeScreen = () => {
+  const [testState, setTestState] = useState(0)
   const navigation = useNavigation()
 
   const componentMain: any[] = [
@@ -32,26 +25,31 @@ export default function SendRecipeScreen() {
 
   const componetComparticipation: any[] = [
     <CompartipactionSystemFalse />,
-    <CompartipactionSystemTrue />,
+    <View>
+      <CompartipactionSystemTrue />
+      <CompartipactionSystemFalse />
+    </View>,
 
   ]
 
   /* Valores dos componentes */
-  const [componentMainValue, setComponentSetMainValue] = useState<number>(0)
+  const [componentMainValue, setComponentMainValue] = useState<number>(0)
   const [compartipactionSystemValue, setCompartipactionSystemValue] = useState<number>(0)
 
 
+  let [stateValue, setStateValue] = useState<number>()
+  useEffect(() => {
+    setStateValue(componentMainValue)
+  }, [componentMainValue])
 
 
 
-  const value = useAppSelector((state) => state.componentMain.value)
-  const dispatch = useAppDispatch()
-  
-  console.log("Value", value)
+
+
+
 
   return (
-    <SafeAreaView>
-
+    <SafeAreaView className='h-full'>
       <View className='bg-[#00665e] p-5 '>
         <View className='flex-row mt-10 '>
           <TouchableOpacity
@@ -64,30 +62,29 @@ export default function SendRecipeScreen() {
         </View>
       </View>
 
-      <ScrollView className=''>
-
+      <ScrollView>
         <View className='flex-col gap-3 m-4'>
           <SubmitRecipeItem
             title='Submeter Receita Médica'
             description='Envie a Sua Receita Médica'
             stateNumber={1}
-            state
+            active={true}
           />
 
           <SubmitRecipeItem
-            title='Submeter Receita Médica'
-            description='Envie a Sua Receita Médica'
-            stateNumber={1}
+            title='Aguardar valor'
+            description='Aguardar um preço para esse Valor'
+            stateNumber={2}
           />
 
           <SubmitRecipeItem
-            title='Submeter Receita Médica'
-            description='Envie a Sua Receita Médica'
-            stateNumber={1}
+            title='Adicionar ao carrinho'
+            description='Adicionar ao carrinho e clonclua a encomedna'
+            stateNumber={3}
           />
         </View>
 
-        <View className='bg-white h-screen'>
+        <View className='bg-white'>
           {/* content */}
           <View className='m-5'>
 
@@ -97,27 +94,18 @@ export default function SendRecipeScreen() {
             />
 
             <MainForButtonComponent>
-              <MainButtonItem title='SMS' componentMainState={value == 0 ? true : false} onPress={() => { }} />
-              <MainButtonItem title='Fotografia' componentMainState={value == 1 ? true : false} onPress={() => { }} />
-              <MainButtonItem title='Código' componentMainState={value == 2 ? true : false} onPress={() => dispatch(setcomponentMainValue(2))} />
+              <MainButtonItem title='SMS' componentMainState={componentMainValue === 0 ? true : false} onPress={() => { setComponentMainValue(0) }} />
+              <MainButtonItem title='Fotografia' componentMainState={componentMainValue === 1 ? true : false} onPress={() => { setComponentMainValue(1) }} />
+              <MainButtonItem title='Código' componentMainState={componentMainValue == 2 ? true : false} onPress={() => { setComponentMainValue(2) }} />
             </MainForButtonComponent>
 
             {/* Content first - COnteudo principal */}
 
-            <View className='mx-auto flex-row gap-3 my-auto items-center'>
-              <TouchableOpacity className='bg-blue-800 p-3 rounded-lg font-medium hover:bg-blue-900' onPress={() => dispatch(setcomponentMainValue(1))}>
-                <Text className='text-white'>Mais</Text>
-              </TouchableOpacity>
-              <Text> {value}  </Text>
-              <TouchableOpacity className='bg-blue-800 p-3 rounded-lg font-medium hover:bg-blue-900' onPress={() => dispatch(setcomponentMainValue(0))}>
-                <Text className='text-white'>Menos</Text>
-              </TouchableOpacity>
-            </View>
 
             <View className='mb-5'>
               {/* input with label input com label  */}
 
-              {componentMain[value]}
+              {componentMain[componentMainValue]}
             </View>
 
 
@@ -127,21 +115,7 @@ export default function SendRecipeScreen() {
             </View>
 
 
-            {/*  <View className='bg-gray-100 p-2 rounded-lg'>
-              
-              <View className='flex-row justify-around gap-2 items-center'>
-                <TouchableOpacity className=' '>
-                  <Text className='upercase'>Não</Text>
-                </TouchableOpacity>
 
-
-
-                <TouchableOpacity className='bg-white shadow rounded-lg px-12 py-2'>
-                  <Text className='font-bold uppercase'>Sim</Text>
-                </TouchableOpacity>
-              </View>
-
-            </View> */}
 
             <MainForButtonComponent>
               <MainButtonItem title='Não' componentMainState={compartipactionSystemValue === 0 ? true : false} onPress={() => setCompartipactionSystemValue(0)} />
@@ -149,9 +123,11 @@ export default function SendRecipeScreen() {
             </MainForButtonComponent>
 
 
-            <View className='my-5'>
+            <View className=''>
 
               {componetComparticipation[compartipactionSystemValue]}
+
+
 
               <View>
                 <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg disabled:text-gray-200' onPress={() => { }}>
@@ -169,6 +145,9 @@ export default function SendRecipeScreen() {
 
 
       </ScrollView>
+
     </SafeAreaView>
   )
 }
+
+export default SendRecipeScreen

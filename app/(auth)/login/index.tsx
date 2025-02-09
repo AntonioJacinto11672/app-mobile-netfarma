@@ -7,7 +7,7 @@ import { useNavigationBuilder } from '@react-navigation/native'
 import { useNavigation, useRouter } from 'expo-router'
 
 
-const LoginScreen = () => {
+const Login = () => {
   const navigation = useNavigation()
   const router = useRouter()
   const [email, setEmail] = useState<string>("")
@@ -53,8 +53,8 @@ const LoginScreen = () => {
           <TouchableOpacity className='flex items-end mb-5 '>
             <Text className='text-gray-700'>Forgot Password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity className='py-3 bg-yellow-400 rounded-xl' onPress={() => { router.push("/home") }}>
-            <Text className='font-xl font-bold text-center text-gray-700'>Login</Text>
+          <TouchableOpacity className='py-3 bg-yellow-400 rounded-xl' onPress={() => { router.push("/(tabs)/home") }}>
+            <Text className='font-xl font-bold text-center text-gray-700'>Login</Text> 
           </TouchableOpacity>
 
         </View>
@@ -90,7 +90,7 @@ const LoginScreen = () => {
         </View>
         <View className='flex-row justify-center mt-7'>
           <Text className='text-gray-500 font-semibold'>Dont't have acount?</Text>
-          <TouchableOpacity className='' onPress={() => router.push("/RegisterScreen")}>
+          <TouchableOpacity className='' onPress={() => router.push("/(auth)/register")}>
             <Text className='font-semibold text-yellow-400'>Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -99,4 +99,4 @@ const LoginScreen = () => {
   )
 }
 
-export default LoginScreen
+export default Login

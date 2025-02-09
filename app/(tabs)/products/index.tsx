@@ -7,7 +7,7 @@ import SubmitRecipeComponent from '@/components/SubmitRecipeComponent'
 import { IconType } from '@/components/IconVectorComponent'
 import HomeHeader from '@/components/ui/HomeHeader'
 
-export default function ProductScreen() {
+export default function ProductS() {
   return (
     <SafeAreaView className='bg-white'>
       <HomeHeader title='Produto' />
@@ -55,11 +55,11 @@ export default function ProductScreen() {
             showsHorizontalScrollIndicator={false}
             className='pt-4 px-2'
           >
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
 
           </ScrollView>
         </View>
@@ -69,16 +69,16 @@ export default function ProductScreen() {
           <TitleCategories title='Todos os Produtos' onPress={() => { }} />
 
           <View className='flex-row flex-wrap mx-7 gap-2'>
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
 
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
 
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
 
           </View>
         </View>

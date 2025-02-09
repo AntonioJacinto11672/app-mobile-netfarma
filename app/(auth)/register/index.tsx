@@ -6,7 +6,7 @@ import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { useNavigationBuilder } from '@react-navigation/native'
 import { useNavigation, useRouter } from 'expo-router'
 
-const RegisterScreen = () => {
+const Register = () => {
   const navigation = useNavigation()
   const router = useRouter()
   return (
@@ -100,4 +100,4 @@ const RegisterScreen = () => {
   )
 }
 
-export default RegisterScreen
+export default Register

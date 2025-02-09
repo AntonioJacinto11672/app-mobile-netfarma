@@ -7,7 +7,7 @@ import ProductCard from '@/components/card/ProductCard'
 import SearchComponent from '@/components/SearchComponent'
 import HomeHeader from '@/components/ui/HomeHeader'
 
-export default function PromotionScreen() {
+export default function Promotion() {
   return (
     <SafeAreaView className='bg-white'>
       {/* Search */}
@@ -36,21 +36,21 @@ export default function PromotionScreen() {
               title='Titúlo do Produto'
               description='Descrição do Produto'
               datePub={new Date("2024-12-31")}
-              urlImg={require('../../assets/images/medicine/5.jpg')}
+              urlImg={require('../../../assets/images/medicine/5.jpg')}
               bottonName='Promoções' />
 
             <PostCard
               title='Titúlo do Produto'
               description='Descrição do Produto'
               datePub={new Date("2024-12-31")}
-              urlImg={require('../../assets/images/medicine/6.jpg')}
+              urlImg={require('../../../assets/images/medicine/6.jpg')}
               bottonName='Promoções' />
 
             <PostCard
               title='Titúlo do Produto'
               description='Descrição do Produto'
               datePub={new Date("2024-12-31")}
-              urlImg={require('../../assets/images/medicine/7.jpg')}
+              urlImg={require('../../../assets/images/medicine/7.jpg')}
               bottonName='Promoções' />
 
           </ScrollView>
@@ -65,16 +65,16 @@ export default function PromotionScreen() {
           <TitleCategories title='Produtos em destaque' onPress={() => { }} />
 
           <View className='flex-row flex-wrap mx-7 gap-2'>
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
 
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
 
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/2.png')} />
-            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../assets/images/medicine/3.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+            <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
 
           </View>
         </View>

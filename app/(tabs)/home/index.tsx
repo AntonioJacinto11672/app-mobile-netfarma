@@ -8,7 +8,6 @@ import IconVectorComponent, { IconType } from '@/components/IconVectorComponent'
 import ProductCard from '@/components/card/ProductCard';
 import TitleCategories from '@/components/card/TitleCategories';
 import ColletionBotton from '@/components/card/ColletionBotton';
-import PostCardCard from '@/components/card/PostCard';
 import PostCard from '@/components/card/PostCard';
 import { Link, useRouter } from 'expo-router';
 
@@ -49,22 +48,22 @@ export default function Home() {
             <SubmitRecipeComponent text='Enviar Receita Médica' icon={{
               size: 22, color: "#00665e",
               value: { type: IconType.FontAwesome6Icon, name: "comment-medical" }
-            }} onPress={() => { router.push("/home/(homePages)/SendRecipeScreen") }} key={1} />
+            }} onPress={() => { router.push("/home/SendRecipeScreen") }} key={1} />
 
             <SubmitRecipeComponent text='Requisitar Produto' icon={{
               size: 22, color: "#00665e",
               value: { type: IconType.FontAwesome5Icon, name: 'laptop-medical' }
-            }} onPress={() => { router.push("/home/(homePages)/RequestScreen") }} key={2} />
+            }} onPress={() => { router.push("/home/RequestScreen") }} key={2} />
 
             <SubmitRecipeComponent text='Receitas e Requisições' icon={{
               size: 22, color: "#00665e",
               value: { type: IconType.FontAwesome5Icon, name: 'notes-medical' }
-            }} onPress={() => { router.push("/home/(cart)") }} key={3} />
+            }} onPress={() => { router.push("/home/RecipeRequestScreen") }} key={3} />
 
             <SubmitRecipeComponent text='Medições de Saúde' icon={{
               size: 22, color: "#00665e",
               value: { type: IconType.FontAwesome5Icon, name: 'briefcase-medical' }
-            }} onPress={() => { router.push("/home/(homePages)/HealthMedicationScreen") }} key={4} />
+            }} onPress={() => { router.push("/(tabs)/home/HealthMedicationScreen") }} key={4} />
 
           </View>
 

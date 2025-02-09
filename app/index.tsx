@@ -1,15 +1,12 @@
-import { View, Text, SafeAreaView } from 'react-native'
-import React, { useState } from 'react'
-import { Redirect } from 'expo-router'
+import { Redirect } from 'expo-router';
+import { useAuth } from '../contexts/AuthContext';
 
-const HomeScreen = () => {
-    const [login, setLogin] = useState<Boolean>(false)
+export default function Index() {
+  const { user } = useAuth();
 
-    if (login) {
-        return <Redirect href={"/home"} />
-    }
-    return (<Redirect href={"/LoginScreen"} />
-    )
+  if (!user) {
+    return <Redirect href="/(tabs)/home" />;
+  }
+
+  return <Redirect href="/(auth)/login" />;
 }
-
-export default HomeScreen;

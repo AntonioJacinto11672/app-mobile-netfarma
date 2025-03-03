@@ -164,7 +164,7 @@ export default function SettingsScreen() {
                     }} />
 
                     <View>
-                        <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => {}}>
+                        <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => {router.push('/login')}}>  
                             <Text className='font-extrabold text-center text-white text-md'>Terminar sessão</Text>
                         </TouchableOpacity>
                     </View>

@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { XMarkIcon } from 'react-native-heroicons/solid'
 import * as Progress from "react-native-progress"
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
+//  import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 
 
 const DeliveryScreen = () => {
@@ -44,7 +44,7 @@ const DeliveryScreen = () => {
         </View>
       </SafeAreaView>
 
-
+{/* 
       <MapView
         initialRegion={{
           latitude: -8.812002,
@@ -68,7 +68,7 @@ const DeliveryScreen = () => {
           identifier='origin'
           pinColor='#00665e'
         />
-      </MapView>
+      </MapView> */}
       <SafeAreaView className='bg-white flex-row items-center space-x-5 h-28'>
         <Image
           source={{

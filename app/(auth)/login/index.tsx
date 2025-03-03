@@ -1,17 +1,30 @@
-import { View, Text, TouchableOpacity, Image, Touchable, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Touchable, TextInput, Button } from 'react-native'
 import React, { useState } from 'react'
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { useNavigationBuilder } from '@react-navigation/native'
 import { useNavigation, useRouter } from 'expo-router'
+import { useForm, Controller } from "react-hook-form"
 
 
 const Login = () => {
   const navigation = useNavigation()
   const router = useRouter()
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  })
+  const onSubmit = (data: any) => console.log(data)
+
+
+
   return (
     <View className='flex-1 bg-white' style={{ backgroundColor: "#00665e" }}>
       <SafeAreaView className='flex'>
@@ -41,21 +54,50 @@ const Login = () => {
       >
         <View className='form space-y-2'>
           <Text className='text-gray-700 ml-4'>Email Address </Text>
-          <TextInput className='p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3'
-            placeholder='Enter Email'
-
+          <Controller
+            control={control}
+            rules={{
+              required: "campo obrigatório",
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput className={`p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3  ${errors.email ? ' text-gray-100 outline outline-red-500' : ''}`}
+                placeholder='Enter email' secureTextEntry
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+            name="email"
           />
+          {errors.email && <Text> {errors.email.message} </Text>}
 
           <Text className='text-gray-700 ml-4'>Password </Text>
-          <TextInput className='p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3'
-            placeholder='Enter Email' secureTextEntry
+          <Controller
+            control={control}
+            rules={{
+              required: "campo obrigatório",
+              maxLength: { value: 20, message: "máximo de 20 caracteres" },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput className={`p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3  ${errors.password ? ' text-gray-100 outline outline-red-500' : ''}`}
+                placeholder='Enter password' secureTextEntry
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+            name="password"
           />
+          {errors.password && <Text className='text-red-500 text-small ml-2'> {errors.password.message} </Text>}
+
+
           <TouchableOpacity className='flex items-end mb-5 '>
             <Text className='text-gray-700'>Forgot Password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity className='py-3 bg-yellow-400 rounded-xl' onPress={() => { router.push("/(tabs)/home") }}>
-            <Text className='font-xl font-bold text-center text-gray-700'>Login</Text> 
+          <TouchableOpacity className='py-3 bg-yellow-400 rounded-xl' onPress={handleSubmit(onSubmit)}>
+            <Text className='font-xl font-bold text-center text-gray-700'>Login</Text>
           </TouchableOpacity>
+
 
         </View>
 
@@ -90,7 +132,7 @@ const Login = () => {
         </View>
         <View className='flex-row justify-center mt-7'>
           <Text className='text-gray-500 font-semibold'>Dont't have acount?</Text>
-          <TouchableOpacity className='' onPress={() => router.push("/(auth)/register")}>
+          <TouchableOpacity className='' onPress={() => router.push("/(auth)/register")}  >
             <Text className='font-semibold text-yellow-400'>Sign Up</Text>
           </TouchableOpacity>
         </View>

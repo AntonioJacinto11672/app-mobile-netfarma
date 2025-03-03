@@ -2,11 +2,14 @@ import { View, Text, TouchableOpacity, Image, Touchable, TextInput, Button } fro
 import React, { useState } from 'react'
 
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ArrowLeftIcon } from 'react-native-heroicons/solid'
+import { ArrowLeftIcon, SignalIcon } from 'react-native-heroicons/solid'
 import { useNavigationBuilder } from '@react-navigation/native'
 import { useNavigation, useRouter } from 'expo-router'
 import { useForm, Controller } from "react-hook-form"
+import UserService from '@/api/services/user.service'
 
+
+const userService = new UserService();
 
 const Login = () => {
   const navigation = useNavigation()
@@ -21,7 +24,31 @@ const Login = () => {
       password: "",
     },
   })
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit = async (data: any) => {
+
+    try {
+      const response = await userService.signIn(data.email, data
+        .password)
+      console.log(response)
+      console.log(response.data)
+        
+      const res = response as any
+
+      
+      if (res.accessToken) {
+        console.log("token", res.accessToken)
+        router.replace("/(tabs)/home")
+      }
+
+      if (res.description) {
+        alert(res.message)
+      }
+
+    } catch (error) {
+      console.log("Error: ",error)
+
+    }
+  }
 
 
 
@@ -58,10 +85,15 @@ const Login = () => {
             control={control}
             rules={{
               required: "campo obrigatório",
+              pattern: {  // regex
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, // regex  para email
+                message: "email inválido"
+              },
+
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput className={`p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3  ${errors.email ? ' text-gray-100 outline outline-red-500' : ''}`}
-                placeholder='Enter email' secureTextEntry
+                placeholder='Enter email' keyboardType='email-address'
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -69,18 +101,23 @@ const Login = () => {
             )}
             name="email"
           />
-          {errors.email && <Text> {errors.email.message} </Text>}
+          {errors.email && <Text className='text-red-500 text-small ml-2'> {errors.email.message} </Text>}
 
           <Text className='text-gray-700 ml-4'>Password </Text>
           <Controller
             control={control}
             rules={{
               required: "campo obrigatório",
-              maxLength: { value: 20, message: "máximo de 20 caracteres" },
+              minLength: { value: 8, message: "mínimo de 6 caracteres" },
+              pattern: {  // regex
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                message: "A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra e um número"
+              }
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput className={`p-4  bg-gray-100 text-gray-700 rounded-2xl mb-3  ${errors.password ? ' text-gray-100 outline outline-red-500' : ''}`}
-                placeholder='Enter password' secureTextEntry
+                placeholder='Enter password'
+                secureTextEntry
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}

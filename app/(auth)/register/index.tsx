@@ -29,14 +29,14 @@ const Register = () => {
   const handleAddUser = async (data: any) => {
     try {
       const response = await userService.singUp(data.email, data.password, data.phoneNumber)
-      console.log(response)
-      console.log(response.data)
+      //console.log(response)
+      //console.log(response.data)
 
       const res = response as any
-      console.log(res)
+      //console.log(res)
 
       if (res.id) {
-        console.log("token", res.id)
+        //console.log("token", res.id)
         router.replace("/(auth)/login")
       }
 

@@ -29,14 +29,14 @@ const Login = () => {
     try {
       const response = await userService.signIn(data.email, data
         .password)
-      console.log(response)
-      console.log(response.data)
+      //console.log(response)
+      //console.log(response.data)
         
       const res = response as any
 
       
       if (res.accessToken) {
-        console.log("token", res.accessToken)
+        //console.log("token", res.accessToken)
         router.replace("/(tabs)/home")
       }
 

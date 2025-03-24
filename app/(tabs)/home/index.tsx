@@ -1,5 +1,5 @@
-import { View, Text, Image, ScrollView, Touchable, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, Image, ScrollView, Touchable, TouchableOpacity, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, AdjustmentsHorizontalIcon } from "react-native-heroicons/outline"
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -10,10 +10,40 @@ import TitleCategories from '@/components/card/TitleCategories';
 import ColletionBotton from '@/components/card/ColletionBotton';
 import PostCard from '@/components/card/PostCard';
 import { Link, useRouter } from 'expo-router';
+import { medicineData } from '@/data/medicineData';
+import useMedicine from '@/api/services/medicine.service';
 
+
+
+
+const usemedicine = new useMedicine()
 export default function Home() {
   const router = useRouter()
+  const [medicines, setMedicines] = useState<MedicineResponse[]>([])
+  const [pageSize, setPageSize] = useState<number>(10)
 
+
+  useEffect(() => {
+
+    fetchMedicine();
+  }, [pageSize]);
+
+  const fetchMedicine = async () => {
+    const response = await usemedicine.getAllMediciine(pageSize);
+    //console.log("Resposta da API:", response)
+
+    if (response?.data) {
+      //console.log("Dados recebidos:", response.data)
+
+      //AS any por apresentar um erro q não compreendo de typagem
+      setMedicines(response.data as any); // Define o estado apenas se data estiver presente
+
+
+    } else {
+      //console.log("Nenhum dado recebido");
+      setMedicines([]); // Define um array vazio caso data seja undefined
+    }
+  };
   const onPressTest = () => {
     console.log("OnPress Test 1")
   }
@@ -43,7 +73,7 @@ export default function Home() {
         </View>
 
 
-        <ScrollView className='bg-gray-50'>
+        <ScrollView className='bg-white'>
           <View className='flex-row justify-around px-1 mx-2'>
             <SubmitRecipeComponent text='Enviar Receita Médica' icon={{
               size: 22, color: "#00665e",
@@ -75,7 +105,7 @@ export default function Home() {
             {/* Title */}
             <TitleCategories title='Produtos em destaque' onPress={() => { }} />
 
-            <ScrollView
+            {/* <ScrollView
               horizontal
               contentContainerStyle={{
                 paddingHorizontal: 15,
@@ -84,13 +114,37 @@ export default function Home() {
               showsHorizontalScrollIndicator={false}
               className='pt-4 px-2'
             >
-              <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
-              <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
-              <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
-              <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/3.png')} />
-              <ProductCard title='Titúlo do Produto' description='Descrição do Produto' price={1000} urlImg={require('../../../assets/images/medicine/2.png')} />
+              {medicine &&
+                medicines.map((item, index) => (
+                  <ProductCard key={index} title={item.name} description={item.description} price={item.price} urlImg={require('../../../assets/images/medicine/2.png')} />
+                ))
+              }
 
-            </ScrollView>
+            </ScrollView> */}
+
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={true}
+              contentContainerStyle={{
+                paddingHorizontal: 15,
+                paddingVertical: 10
+              }}
+              className='pt-4 px-2'
+              data={medicines}
+              renderItem={({ item }) => (
+                <>
+                  <ProductCard id={item.id} title={item.name} description={item.description} price={item.price} urlImg={require('../../../assets/images/medicine/2.png')} />
+                </>
+
+              )}
+              ListEmptyComponent={
+                <View className='flex-1 justify-center items-center'>
+                  <Text className='text-xl font-bold'>Sem produtos</Text>
+                </View>
+              }
+              keyExtractor={(item) => item.id.toString()} />
+
+
           </View>
 
 

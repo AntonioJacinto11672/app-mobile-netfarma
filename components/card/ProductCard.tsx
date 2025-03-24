@@ -6,6 +6,7 @@ import { FormatPrice } from '@/utils/FormPrice'
 import { useNavigation, useRouter } from 'expo-router'
 
 interface ProductCardProps {
+    id: string
     title: string,
     description: string,
     price: number,
@@ -19,7 +20,7 @@ export default function ProductCard(props: ProductCardProps) {
     return (
         <>
             <View className='bg-gray-50  items-center shadow-sm rounded-lg mr-5 '>
-               <TouchableOpacity onPress={() => { router.push('/home/(homePages)/product/PoductDetailsScreen') }}>
+               <TouchableOpacity onPress={() => { router.push(`/products/${props.id}`) }}>
                  <Image
                     source={props.urlImg}
                     className='w-40 h-40 p-3 bg-gray-100 opacity-1 rounded-lg mb-4'

@@ -1,43 +1,27 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserType } from '../utils/userType';
+import React, { createContext, useContext, useState } from 'react';
+
 interface AuthContextType {
-  user: UserType | null;
-  login: ({ id, email, userName, phoneNumber, roleId, password }: UserType) => Promise<void>;
+  user: any;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState({
+    id: 1,
+    email: ''
+  });
 
-  useEffect(() => {
-    const loadUserFromStorage = async () => {
-      const storedUser = await AsyncStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
-    };
-
-    loadUserFromStorage();
-  }, []);
-
-
-  const login = async ({ id, email, userName, phoneNumber, roleId, password }: UserType) => {
+  const login = async (email: string, password: string) => {
     // Simulação de login
-
-    //setUser({ id: 1, email });
-    const loggedInUser = { id, email, userName, phoneNumber, roleId, password };
-    setUser(loggedInUser);
-    await AsyncStorage.setItem('user', JSON.stringify(loggedInUser));
-
+    setUser({ id: 1, email });
   };
 
-  const logout = async () => {
-    setUser(null);
-    await AsyncStorage.removeItem('user');
-  }
+  const logout = () => {
+    setUser({ id: 0, email: '' });
+  };
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

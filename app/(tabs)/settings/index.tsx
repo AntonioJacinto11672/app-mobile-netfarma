@@ -5,15 +5,14 @@ import IconVectorComponent, { IconType } from '@/components/IconVectorComponent'
 import ListItemsSettings from '@/components/ListItemsSettings'
 import TitleCategories from '@/components/card/TitleCategories'
 import { useRouter } from 'expo-router'
+import { useAuth } from '@/contexts/AuthContext'
 
 
 export default function SettingsScreen() {
     const router = useRouter()
-    const logout = () => {
-
-    }
+   const {logout } = useAuth()
     return (
-        <SafeAreaView className='bg-white '>
+        <SafeAreaView className='bg-white h-full'>
             <ScrollView className='flex flex-col '>
                 <View>
 
@@ -163,12 +162,13 @@ export default function SettingsScreen() {
                         color: "#00665e"
                     }} />
 
-                    <View>
-                        <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => {router.push('/login')}}>  
-                            <Text className='font-extrabold text-center text-white text-md'>Terminar sessão</Text>
-                        </TouchableOpacity>
-                    </View>
 
+
+                </View>
+                <View className='sticky  bottom-0'>
+                    <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => { logout() }}>
+                        <Text className='font-extrabold text-center text-white text-md'>Terminar sessão</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>

@@ -1,13 +1,26 @@
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import { Fontisto, Ionicons } from '@expo/vector-icons';
 import IconVectorComponent, { IconType } from '@/components/IconVectorComponent';
 import { HapticTab } from '@/components/HapticTab';
 import BlurTabBarBackground from '@/components/ui/TabBarBackground.ios';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
 import { Colors } from '@/constants/Colors';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function TabsLayout() {
   const colorScheme = useColorScheme();
+  /* Verificar usuario Logado */
+      const { tokenLogeded } = useAuth();
+  
+  
+      console.log("Token Loged", tokenLogeded)
+  
+      const token = localStorage.getItem('token');
+      //console.log("Token LocalStorage", token)
+  
+      if (!(tokenLogeded || token)) {
+          return <Redirect href="/(auth)/login" />;
+      }
   return (
     <Tabs screenOptions={{
       tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,

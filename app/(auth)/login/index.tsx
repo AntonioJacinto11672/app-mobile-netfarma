@@ -4,9 +4,10 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ArrowLeftIcon, SignalIcon } from 'react-native-heroicons/solid'
 import { useNavigationBuilder } from '@react-navigation/native'
-import { useNavigation, useRouter } from 'expo-router'
+import { Redirect, useNavigation, useRouter } from 'expo-router'
 import { useForm, Controller } from "react-hook-form"
 import UserService from '@/api/services/user.service'
+import { useAuth } from '@/contexts/AuthContext'
 
 
 const userService = new UserService();
@@ -14,6 +15,7 @@ const userService = new UserService();
 const Login = () => {
   const navigation = useNavigation()
   const router = useRouter()
+
   const {
     control,
     handleSubmit,
@@ -24,6 +26,9 @@ const Login = () => {
       password: "",
     },
   })
+
+  const { login, tokenLogeded, user } = useAuth()
+
   const onSubmit = async (data: any) => {
 
     try {
@@ -31,12 +36,17 @@ const Login = () => {
         .password)
       //console.log(response)
       //console.log(response.data)
-        
+
       const res = response as any
 
-      
+
       if (res.accessToken) {
         //console.log("token", res.accessToken)
+        const responseIserInfo = await userService.getUserInfo(res.accessToken)
+        const resUserInfo = responseIserInfo as any
+
+        //console.log("User Info", resUserInfo)
+        login(resUserInfo.data, res.accessToken)
         router.replace("/(tabs)/home")
       }
 
@@ -45,10 +55,13 @@ const Login = () => {
       }
 
     } catch (error) {
-      console.log("Error: ",error)
+      console.log("Error: ", error)
 
     }
   }
+
+
+  
 
 
 

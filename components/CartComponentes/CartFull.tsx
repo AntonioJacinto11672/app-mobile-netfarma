@@ -7,6 +7,7 @@ import TouchableFixed from '../ui/TouchableFixed'
 import { CartProductType } from '@/utils/cartType'
 import { truncateText } from '@/utils/TruncateText'
 import { useCart } from '@/contexts/CartContext'
+import SetQuantity from './SetQuantity'
 
 interface CartFullProps {
     item: CartProductType
@@ -42,30 +43,11 @@ export default function CartFull({ item }: CartFullProps) {
                 <Text className='justify-start mx-auto'> {FormatPrice(item.price)} </Text>
             </View>
 
-            <View className='flex-row items-center justify-center gap-2'>
-                <TouchableOpacity className='bg-gray-200 rounded-full p-2' onPress={() => handleCartQtyDecrease(item)}>
-                    <IconVectorComponent icon={{
-                        value: {
-                            type: IconType.AntDesignIcon,
-                            name: "minus"
-                        },
-                        size: 20,
-                        color: "#00665e"
-                    }} />
-                </TouchableOpacity>
-                <Text className='font-bold text-lg'> {item.quantity} </Text>
-                <TouchableOpacity className='bg-gray-200 rounded-full p-2' onPress={() => handleCartQtyIncrease(item)}>
-                    <IconVectorComponent icon={{
-                        value: {
-                            type: IconType.AntDesignIcon,
-                            name: "plus"
-                        },
-                        size: 20,
-                        color: "#00665e"
-                    }} />
-                </TouchableOpacity>
-
-            </View>
+            <SetQuantity
+                cartProduct={item}
+                handleQtyIncrease={() => handleCartQtyIncrease(item)}
+                handleQtyDecrease={() => handleCartQtyDecrease(item)}
+            />
 
             {/* Fechar e preço */}
 

@@ -8,6 +8,7 @@ import EncomendaComponent from '@/components/CartComponentes/EncomendaComponent'
 import TouchableFixed from '@/components/ui/TouchableFixed'
 import HomeHeader from '@/components/ui/HomeHeader'
 import { useRouter } from 'expo-router'
+import { useCart } from '@/contexts/CartContext'
 const components: any = [
   <CartComponent />,
   <OrderComponent />,
@@ -17,6 +18,7 @@ const components: any = [
 export default function Cart() {
   const [valueComponent, setValueComponent] = useState<number>(0)
   const router = useRouter();
+  const { cartTotalAmount } = useCart();
 
   return (
     <SafeAreaView className='bg-white h-full'>
@@ -71,7 +73,9 @@ export default function Cart() {
           {components[valueComponent]}
         </View>
       </ScrollView>
-      {valueComponent === 0 && <TouchableFixed title='Próximo Passo' onPress={() => { router.replace("/(tabs)/cart/checkout") }} />}
+      {valueComponent === 0 &&
+        <TouchableFixed title='Próximo Passo' total={cartTotalAmount} subtotal={cartTotalAmount} onPress={() => { router.replace("/(tabs)/cart/checkout") }} />
+      }
     </SafeAreaView>
   )
 }

@@ -4,6 +4,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useFonts } from 'expo-font';
 import '../global.css'
+import { CartProvider } from '@/contexts/CartContext';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -14,7 +15,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <AuthProvider>
-        <Slot />
+        <CartProvider>
+          <Slot />
+        </CartProvider>
       </AuthProvider>
     </ThemeProvider>
   );

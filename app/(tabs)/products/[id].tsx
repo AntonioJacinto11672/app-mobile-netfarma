@@ -1,16 +1,25 @@
 import useMedicine from '@/api/services/medicine.service';
 import IconVectorComponent, { IconType } from '@/components/IconVectorComponent';
+import { CartContext } from '@/hooks/useCart1';
 import { FormatPrice } from '@/utils/FormPrice';
 import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import { useGlobalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native-animatable';
+import { useCart } from '@/contexts/CartContext';
+
 const usemedicine = new useMedicine()
 
 const productDtail = () => {
     const params = useLocalSearchParams()
     const [medicine, setMedicine] = React.useState<MedicineResponse>()
+
+    const [isProductInCart, setIsProductInCart] = React.useState(false)
+
+    /* As funções do useCart */
+    const { handleAddProductToCart, cartProducts } = useCart();
+
     const router = useRouter()
     React.useEffect(() => {
         getMedicineById()
@@ -27,6 +36,20 @@ const productDtail = () => {
             console.log("Erro ao buscar produto ", error)
         }
     }
+
+
+    console.log("Produto no carrinho ", cartProducts)
+    React.useEffect(() => {
+        setIsProductInCart(false)
+        if (cartProducts) {
+            const exintingIndex = cartProducts.findIndex((item) => item.id === params.id)
+            if (exintingIndex > -1) {
+                setIsProductInCart(true)
+            }
+        }
+
+
+    }, [cartProducts])
     return (
         <SafeAreaView className='bg-white h-full'>
             <ScrollView className=''>
@@ -43,6 +66,21 @@ const productDtail = () => {
                     <View className='border-b border-b-gray-200 '>
                         <Text className='font-semibold text-2xl'> {medicine?.name && medicine?.name} </Text>
                         <Text className='text-gray-500 text-md text-justify my-2'> Medicamento utilizado para aliviar ... </Text>
+                        {
+                            isProductInCart ? (
+                                <View className='flex-row  gap-x-2 my-2 items-center'>
+                                    <IconVectorComponent icon={{
+                                        value: {
+                                            type: IconType.MaterialCommunityIcon,
+                                            name: "cart-check"
+                                        },
+                                        size: 20,
+                                        color: "green"
+                                    }} />
+                                    <Text className='text-green-700 text-md text-justify my-2 items-center'>
+                                    Produto adicionado ao carrinho </Text>
+                                </View>) : ''
+                        }
                         <View className='flex-row justify-between my-2 items-center'>
                             <Text className='font-bold text-lg my-2'> {medicine?.price && FormatPrice(medicine?.price)} </Text>
                         </View>
@@ -65,9 +103,9 @@ const productDtail = () => {
 
                         </View>
                         <Text className='text-justify text-lg my-3'>
-                           {medicine?.description && medicine?.description}
+                            {medicine?.description && medicine?.description}
                         </Text>
-                       {/*  <Text className='text-justify text-lg my-3'>
+                        {/*  <Text className='text-justify text-lg my-3'>
                             Este medicamento é conhecido por sua segurança e eficácia quando usado conforme as instruções. O Paracetamol é uma escolha popular para muitas pessoas devido à sua capacidade de proporcionar alívio rápido e duradouro sem causar muitos efeitos colaterais.
                         </Text>
                         <Text className='text-justify text-lg my-3'>
@@ -143,9 +181,19 @@ const productDtail = () => {
                 </View>
             </ScrollView>
             <View className='sticky  bottom-0 bg-gray-100'>
-                <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => { }}>
-                    <Text className='font-extrabold text-center text-white text-md'>Adicionar ao carrinho</Text>
-                </TouchableOpacity>
+                {
+                    isProductInCart ? (
+                        <>
+                            <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => { router.push("/(tabs)/cart") }}>
+                                <Text className='font-extrabold text-center text-white text-md'>Ver carrinho</Text>
+                            </TouchableOpacity>
+                        </>
+                    ) : (
+                        <TouchableOpacity className='bg-[#00665e] m-5 p-5 rounded-lg' onPress={() => { handleAddProductToCart(medicine as any) }}>
+                            <Text className='font-extrabold text-center text-white text-md'>Adicionar ao carrinho</Text>
+                        </TouchableOpacity>
+                    )
+                }
             </View>
         </SafeAreaView>
     );

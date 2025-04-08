@@ -7,5 +7,5 @@ interface MedicineResponse {
   providerId: string
   isActive: boolean
   medicineCategories: CategoryResponse
-  medicineFiles: MedicineFileResponse
+  medicineFiles: MedicineFileResponse | null
 } 

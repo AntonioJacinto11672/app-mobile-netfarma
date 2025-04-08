@@ -1,12 +1,17 @@
 import { CartProductType } from '@/utils/cartType';
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 interface CartContextType {
-    handleAddProductToCart: (product: CartProductType) => void;
-    cartProducts: CartProductType[] | null;
-    paymentIntent: string | null,
+    cartTotalQty: number;
     cartTotalAmount: number;
+    cartProducts: CartProductType[] | null;
+    handleAddProductToCart: (product: CartProductType) => void;
+    handleRemoveProductFromCart: (product: CartProductType) => void;
+    handleCartQtyIncrease: (product: CartProductType) => void;
+    handleCartQtyDecrease: (product: CartProductType) => void;
     handleClearCart: () => void,
+    paymentIntent: string | null,
+    handleSetPaymentIntent: (val: string | null) => void
 
 }
 
@@ -20,7 +25,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const [paymentIntent, setPaymentIntent] = useState<string | null>(null)
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         const cartItems: any = localStorage.getItem("netFarmaCartItems")
         const cProducts: CartProductType[] | null = JSON.parse(cartItems)
         const netFarmaPaymentIntent: any = localStorage.getItem("netFarmaPaymentIntent")
@@ -31,24 +36,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setPaymentIntent(paymentIntent)
     }, [])
 
-    const handleAddProductToCart = useCallback((product: CartProductType) => {
-        setCartProducts((prev) => {
-            let updatedCart;
-            if (prev) {
-                updatedCart = [...prev, product]
-            } else {
-                updatedCart = [product]
-            }
-            console.log("Produtos adicionados ", updatedCart)
-            //Por um toast de Sucesso
-            console.log('Product Added to cart')
-            localStorage.setItem("netFarmaCartItems", JSON.stringify(updatedCart))
-            localStorage.setItem("netFarmaCartItemsOrder", JSON.stringify(updatedCart))
-            return updatedCart
-        })
-    }, [])
-
-    React.useEffect(() => { 
+    useEffect(() => {
         const getTotal = () => {
             if (cartProducts) {
 
@@ -67,7 +55,81 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
         getTotal()
     }
-        ,[cartProducts])
+        , [cartProducts])
+
+    const handleAddProductToCart = useCallback((product: CartProductType) => {
+        setCartProducts((prev) => {
+            let updatedCart;
+            if (prev) {
+                updatedCart = [...prev, product]
+            } else {
+                updatedCart = [product]
+            }
+            console.log("Produtos adicionados ", updatedCart)
+            //Por um toast de Sucesso
+            console.log('Product Added to cart')
+            localStorage.setItem("netFarmaCartItems", JSON.stringify(updatedCart))
+            localStorage.setItem("netFarmaCartItemsOrder", JSON.stringify(updatedCart))
+            return updatedCart
+        })
+    }, [])
+
+    const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
+        if (cartProducts) {
+            const filteredProducts = cartProducts.filter((item) => {
+                return item.id !== product.id
+            })
+            //Por um toast de sucesso
+            console.log('Produto removido')
+            localStorage.setItem("netFarmaCartItems", JSON.stringify(filteredProducts))
+            setCartProducts(filteredProducts)
+        }
+    }, [cartProducts])
+
+
+    const handleCartQtyIncrease = useCallback((product: CartProductType) => {
+        let updatedCart;
+
+
+        if (product.quantity === 99) {
+            //Por um toast de error
+            return console.error("Ops! Máximo alcançado")
+        }
+
+        if (cartProducts) {
+            updatedCart = [...cartProducts]
+
+            const exintingIndex = cartProducts.findIndex((item) => item.id === product.id)
+            if (exintingIndex > -1) {
+                updatedCart[exintingIndex].quantity = ++updatedCart[exintingIndex].quantity
+            }
+
+            setCartProducts(updatedCart)
+            localStorage.setItem("netFarmaCartItems", JSON.stringify(updatedCart))
+        }
+    }, [cartProducts])
+
+    const handleCartQtyDecrease = useCallback((product: CartProductType) => {
+        let updatedCart;
+        console.log("Antigiu o Limit")
+
+        if (product.quantity === 1) {
+            //Por um toast de error
+            return console.error("Ops! Mínimo alcançado")
+        }
+
+        if (cartProducts) {
+            updatedCart = [...cartProducts]
+
+            const exintingIndex = cartProducts.findIndex((item) => item.id === product.id)
+            if (exintingIndex > -1) {
+                updatedCart[exintingIndex].quantity = --updatedCart[exintingIndex].quantity
+            }
+
+            setCartProducts(updatedCart)
+            localStorage.setItem("netFarmaCartItems", JSON.stringify(updatedCart))
+        }
+    }, [cartProducts])
 
     const handleClearCart = useCallback(() => {
         setCartProducts(null)
@@ -77,15 +139,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     }, [cartProducts])
 
-    const values = {
-        handleAddProductToCart,
-        cartProducts,
-        paymentIntent,
+    const handleSetPaymentIntent = useCallback((val: string | null) => {
+        setPaymentIntent(val)
+        localStorage.setItem("netFarmaPaymentIntent", JSON.stringify(val))
+    }, [paymentIntent])
+    const value = {
+        cartTotalQty,
         cartTotalAmount,
-        handleClearCart
-    }
+        cartProducts,
+        handleAddProductToCart,
+        handleRemoveProductFromCart,
+        handleCartQtyIncrease,
+        handleCartQtyDecrease,
+        handleClearCart,
+        paymentIntent,
+        handleSetPaymentIntent
+    } 
     return (
-        <CartContext.Provider value={{ handleAddProductToCart, cartProducts, paymentIntent, cartTotalAmount, handleClearCart }}>
+        <CartContext.Provider value={value}>
             {children}
         </CartContext.Provider>
     );

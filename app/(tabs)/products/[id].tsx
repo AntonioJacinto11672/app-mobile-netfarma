@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native-animatable';
 import { useCart } from '@/contexts/CartContext';
+import { CartProductType } from '@/utils/cartType';
 
 const usemedicine = new useMedicine()
 
@@ -29,9 +30,21 @@ const productDtail = () => {
         try {
             const idMedicine = params.id as string;
             const response = await usemedicine.getMedicineById(idMedicine)
-            console.log("Produto individual ", response)
+           
+            const medicideneData = response as MedicineResponse;
+            console.log("Produto individual ", medicideneData)  
+            setMedicine({
+                id: medicideneData.id,
+                name: medicideneData.name,
+                description: medicideneData.description,
+                quantity: 1,
+                price: medicideneData.price,
+                providerId: medicideneData.providerId,
+                isActive: medicideneData.isActive,
+                medicineCategories: medicideneData.medicineCategories,
+                medicineFiles: null
 
-            setMedicine(response as any)
+            })
         } catch (error) {
             console.log("Erro ao buscar produto ", error)
         }
@@ -78,7 +91,7 @@ const productDtail = () => {
                                         color: "green"
                                     }} />
                                     <Text className='text-green-700 text-md text-justify my-2 items-center'>
-                                    Produto adicionado ao carrinho </Text>
+                                        Produto adicionado ao carrinho </Text>
                                 </View>) : ''
                         }
                         <View className='flex-row justify-between my-2 items-center'>

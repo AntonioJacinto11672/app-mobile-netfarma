@@ -2,12 +2,15 @@ import { Redirect } from 'expo-router';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Index() {
-  const { user, logout, login } = useAuth();
-  logout();
+  const { tokenLogeded } = useAuth();
 
-  login("antjacinto1672@gmail.com", "123456");
 
-  if (user.id !== 0 && user.email !== '') {
+  console.log("Token Loged", tokenLogeded)
+
+  const token = localStorage.getItem('token');
+  console.log("Token LocalStorage", token)
+
+  if (tokenLogeded || token) {
     return <Redirect href="/(tabs)/home" />;
   }
 

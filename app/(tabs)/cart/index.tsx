@@ -74,7 +74,7 @@ export default function Cart() {
         </View>
       </ScrollView>
       {valueComponent === 0 &&
-        <TouchableFixed title='Próximo Passo' total={cartTotalAmount} subtotal={cartTotalAmount} onPress={() => { router.replace("/(tabs)/cart/checkout") }} />
+        <TouchableFixed title='Próximo Passo' total={cartTotalAmount} subtotal={cartTotalAmount} onPress={() => { router.replace("/(tabs)/cart/PreparingOrderScreen") }} />
       }
     </SafeAreaView>
   )

@@ -29,19 +29,24 @@ export default function Home() {
   }, [pageSize]);
 
   const fetchMedicine = async () => {
-    const response = await usemedicine.getAllMediciine(pageSize);
-    //console.log("Resposta da API:", response)
+    try {
+      const response = await usemedicine.getAllMediciine(pageSize);
+      //console.log("Resposta da API:", response)
 
-    if (response?.data) {
-      //console.log("Dados recebidos:", response.data)
+      if (response?.data) {
+        //console.log("Dados recebidos:", response.data)
 
-      //AS any por apresentar um erro q não compreendo de typagem
-      setMedicines(response.data as any); // Define o estado apenas se data estiver presente
+        //AS any por apresentar um erro q não compreendo de typagem
+        setMedicines(response.data as any); // Define o estado apenas se data estiver presente
 
 
-    } else {
-      //console.log("Nenhum dado recebido");
-      setMedicines([]); // Define um array vazio caso data seja undefined
+      } else {
+        //console.log("Nenhum dado recebido");
+        setMedicines([]); // Define um array vazio caso data seja undefined
+      }
+    } catch (error) {
+      console.log(error);
+
     }
   };
   const onPressTest = () => {

@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { XMarkIcon } from 'react-native-heroicons/solid'
 import * as Progress from "react-native-progress"
+import SearchLocalition from '@/components/delivery/SearchLocalition'
 //  import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 
 
@@ -40,8 +41,10 @@ const DeliveryScreen = () => {
             />
           </View>
           <Progress.Bar indeterminate={true} color='#00665e' progress={0.4} />
-          <Text className='mt-3 text-gray-500'>Your Order is being prepared</Text>
-        </View>
+          <Text className='mt-3 text-gray-500'>O seu pedido está sendo preparado</Text>
+          <SearchLocalition />
+        </View> 
+        
       </SafeAreaView>
 
 {/* 

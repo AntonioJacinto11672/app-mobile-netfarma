@@ -1,11 +1,22 @@
 import ButtonLargeOpacity from '@/components/ui/ButtonLargeOpacity';
 import HomeHeader from '@/components/ui/HomeHeader';
-import { useNavigation, useRouter } from 'expo-router';
-import React from 'react';
+import { Redirect, useNavigation, useRouter } from 'expo-router';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, TextInput, Image, Button } from 'react-native';
+import OrderItemService from '../../../api/services/OrderItem.service';
+import { useCart } from '@/contexts/CartContext';
+import { cartProductCalculate } from '@/utils/cartProductCalculate';
+import OrderService from '@/api/services/Order.service';
+import OrderDetailService from '@/api/services/OrderDetail.service';
 
+
+const orderItemService = new OrderItemService()
+const calculateProductService = new OrderItemService()
+const orderDetailService = new OrderDetailService();
 const AddressScreen = () => {
+  const [isCheckout, setIsCheckout] = useState(false);
+  const [netFarmaCheckout, setNetFarmaCheckout] = useState<CalculateResponse | undefined>()
   const {
     control,
     handleSubmit,
@@ -21,14 +32,44 @@ const AddressScreen = () => {
     },
   })
 
+  const { cartProducts } = useCart()
 
 
   const navigation = useNavigation()
   const router = useRouter()
 
+  /* Passar os valores para calcular */
+  const calculateProduct: cartProductCalculate[] | undefined = cartProducts?.map(product => ({
+    medicineId: product.id,
+    quantity: product.quantity
+  }))
 
   const handleAdddLocation = async (data: any) => {
-    console.log("data: ", data)
+    try {
+
+      /*  console.log("data: ", data) */
+      /* aquui vai guardar os dados e fará o checkou do produto */
+
+      /* Save Email de entrega tmp */
+      /* Fazer o Checkout */
+      const values = calculateProduct as any
+      const result = await orderDetailService.calculate(values)
+      console.log("result", result)
+      if (result.error) {
+        console.log(`O Error é ${result.error}`)
+
+      }
+
+      if (result) {
+        localStorage.setItem("netFarmaCheckout", JSON.stringify(result))
+        console.log(`O result é ${result}`)
+      }
+
+      router.push("/(tabs)/cart/Payment")
+    } catch (error) {
+      console.log("Error: ", error)
+
+    }
   }
 
   return (
@@ -36,10 +77,7 @@ const AddressScreen = () => {
       <HomeHeader title='Carrinho - Endereço de entrega' />
       <ScrollView>
         <View className='flex-1 bg-white px-8 pt-8'
-          style={{
-            borderTopLeftRadius: 50,
-            borderTopRightRadius: 50
-          }}
+
         >
           <View className='form space-y-2'>
             {/* Complement Input */}
@@ -83,7 +121,7 @@ const AddressScreen = () => {
               {errors.state && <Text className='text-red-500 text-small ml-2'> {errors.state.message} </Text>}
 
             </View>
-            
+
             <View className='space-y-2'>
               <Text className='text-gray-700 ml-4'>Cidade </Text>
               <Controller

@@ -45,31 +45,7 @@ const AddressScreen = () => {
   }))
 
   const handleAdddLocation = async (data: any) => {
-    try {
-
-      /*  console.log("data: ", data) */
-      /* aquui vai guardar os dados e fará o checkou do produto */
-
-      /* Save Email de entrega tmp */
-      /* Fazer o Checkout */
-      const values = calculateProduct as any
-      const result = await orderDetailService.calculate(values)
-      console.log("result", result)
-      if (result.error) {
-        console.log(`O Error é ${result.error}`)
-
-      }
-
-      if (result) {
-        localStorage.setItem("netFarmaCheckout", JSON.stringify(result))
-        console.log(`O result é ${result}`)
-      }
-
-      router.push("/(tabs)/cart/Payment")
-    } catch (error) {
-      console.log("Error: ", error)
-
-    }
+    router.push("/cart/checkout")
   }
 
   return (

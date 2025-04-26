@@ -10,9 +10,10 @@ import { useCart } from '@/contexts/CartContext'
 import SetQuantity from './SetQuantity'
 
 interface CartFullProps {
-    item: CartProductType
+    item: CartProductType,
+    touchableAnable?: boolean,
 }
-export default function CartFull({ item }: CartFullProps) {
+export default function CartFull({ item, touchableAnable }: CartFullProps) {
     const { handleRemoveProductFromCart, handleCartQtyIncrease, handleCartQtyDecrease } = useCart()
     return (
         <View className='flex-row justify-between mx-5 text-xs gap-4 pb-2  mt-8 font-semibold border-b  border-b-gray-200'>
@@ -43,27 +44,33 @@ export default function CartFull({ item }: CartFullProps) {
                 <Text className='justify-start mx-auto'> {FormatPrice(item.price)} </Text>
             </View>
 
-            <SetQuantity
-                cartProduct={item}
-                handleQtyIncrease={() => handleCartQtyIncrease(item)}
-                handleQtyDecrease={() => handleCartQtyDecrease(item)}
-            />
+            {
+                !touchableAnable ? <SetQuantity
+                    cartProduct={item}
+                    handleQtyIncrease={() => handleCartQtyIncrease(item)}
+                    handleQtyDecrease={() => handleCartQtyDecrease(item)}
+                /> : <Text className='font-bold text-lg'> {item.quantity} </Text>
+            }
+
 
             {/* Fechar e preço */}
 
             <View className=' justify-between items-end'>
+               {
+                !touchableAnable ? 
                 <TouchableOpacity className='' onPress={() => handleRemoveProductFromCart(item)}>
-                    <Text className='text-red-600 font-bold text-lg hover:text-red-800'>
-                        <IconVectorComponent icon={{
-                            value: {
-                                type: IconType.AntDesignIcon,
-                                name: "close"
-                            },
-                            size: 20,
-                            color: ""
-                        }} />
-                    </Text>
-                </TouchableOpacity>
+                <Text className='text-red-600 font-bold text-lg hover:text-red-800'>
+                    <IconVectorComponent icon={{
+                        value: {
+                            type: IconType.AntDesignIcon,
+                            name: "close"
+                        },
+                        size: 20,
+                        color: ""
+                    }} />
+                </Text>
+            </TouchableOpacity> : null
+               }
                 <Text className=''> {FormatPrice(item.price * item.quantity)} </Text>
             </View>
         </View>

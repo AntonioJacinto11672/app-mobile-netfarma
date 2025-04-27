@@ -3,12 +3,17 @@ import ExpressPayment from '@/components/paymentMethod/ExpressPayment';
 import MulticaixaReferencePayment from '@/components/paymentMethod/MulticaixaReferencePayment';
 import PaymentTransfer from '@/components/paymentMethod/PaymentTransfer';
 import HomeHeader from '@/components/ui/HomeHeader';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Payment = () => {
+    /* 
+        Nota para relembrar, precisamos pegar o valor a ser pago, caso não termina o de fazer a compra e o pedido já está feito 
+        
+       */
     const paymentComponents = [
         <PaymentTransfer />,
         <MulticaixaReferencePayment />,
@@ -17,6 +22,11 @@ const Payment = () => {
 
     ]
     const [valueComponent, setValueComponent] = useState<number>(0)
+    const router = useRouter()
+    const handleFinalizarCompra = () => {
+        console.log("Compras finalizadas com sucesso...")
+        router.replace("/home")
+    }
 
     return (
         <SafeAreaView className='bg-white h-full'>
@@ -70,7 +80,7 @@ const Payment = () => {
                 </View>
             </ScrollView>
 
-            <TouchableOpacity className='bg-[#00665e] p-4 rounded-lg mx-5 my-3'>
+            <TouchableOpacity className='bg-[#00665e] p-4 rounded-lg mx-5 my-3' onPress={handleFinalizarCompra}>
                 <Text className='text-white text-center text-lg font-semibold'>Finalizar Compra</Text>
             </TouchableOpacity>
         </SafeAreaView>

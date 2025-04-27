@@ -35,7 +35,7 @@ export default function checkout() {
   }))
 
   const handleCkeckout = async () => {
-    console.log("Checkout")
+   /*  console.log("Checkout") */
     /*  console.log("data: ", data) */
     /* aquui vai guardar os dados e fará o checkou do produto */
 
@@ -46,7 +46,7 @@ export default function checkout() {
     const values = calculateProduct as any
     const result = await orderDetailService.calculate(values)
 
-    console.log("result", result)
+    /* console.log("result", result) */
     if (result.error) {
       console.log(`O Error é ${result.error}`)
 
@@ -89,9 +89,9 @@ export default function checkout() {
       //3º Criar os itens do pedido
       const dataCheckoutStr: any = localStorage.getItem("netFarmaCheckout");
       const dataCheckoutObj: CreateOrderDetailRequest | null = JSON.parse(dataCheckoutStr);
-      console.log("resultCreateOrder aqui", resultCreateOrder)
+      /* console.log("resultCreateOrder aqui", resultCreateOrder) */
       const id = dataCheckoutStr?.id
-      console.log("dataCheckoutStr aqui 2", id)
+      /* console.log("dataCheckoutStr aqui 2", id) */
       if (!dataCheckoutStr) {
 
 
@@ -101,7 +101,7 @@ export default function checkout() {
 
       
       const dataCheckout = JSON.parse(dataCheckoutStr);
-      console.log("resultCreate Order", resultCreateOrder)
+      /* console.log("resultCreate Order", resultCreateOrder) */
       const idOrder = resultCreateOrder as any
      
       if (resultCreateOrder) {
@@ -140,7 +140,11 @@ export default function checkout() {
 
          /* Terminar e limpar os  */
          handleClearCart()
-         localStorage.removeItem("netFarmaCheckout")
+         /* localStorage.removeItem("netFarmaCheckout") */
+         /* 
+          Nota para relembrar, precisamos pegar o valor a ser pago, caso não termina o de fazer a compra e o pedido já está feito 
+
+         */
          localStorage.removeItem("netFarmaCartItemsOrder")
          /* Faltando o toast Ou Alert */
         router.replace("/cart/Payment")

@@ -10,14 +10,16 @@ export default function CartComponent() {
   const { cartProducts } = useCart()
   return (
     <View>
-      <View className="flex-row justify-between mx-5 text-xs gap-4 pb-2  mt-8 font-semibold ">
-        <View className="flex-col ">PRODUCTO</View>
-        <View className="">PREÇO</View>
-        <View className="">QUANTIDADE</View>
-        <View className="">TOTAL</View>
-      </View>
+      {
+        cartProducts && <View className="flex-row justify-between mx-5 text-xs gap-4 pb-2  mt-8 font-semibold ">
+          <View className="flex-col ">PRODUCTO</View>
+          <View className="">PREÇO</View>
+          <View className="">QUANTIDADE</View>
+          <View className="">TOTAL</View>
+        </View>
+      }
 
-      
+
 
       <FlatList
         data={cartProducts}
@@ -26,7 +28,7 @@ export default function CartComponent() {
         ListEmptyComponent={<CartEmpty />}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
-      
+
       />
     </View>
   )

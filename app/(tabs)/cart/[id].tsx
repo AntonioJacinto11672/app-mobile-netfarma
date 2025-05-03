@@ -1,11 +1,12 @@
+import HomeHeader from '@/components/ui/HomeHeader';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 
 const OrderItens = () => {
   return (
-    <View>
-      <Text>OrderItens</Text>
-    </View>
+    <SafeAreaView className="bg-white h-full">
+       <HomeHeader atateGoBack title='Carrinho' />
+    </SafeAreaView>
   );
 }
 

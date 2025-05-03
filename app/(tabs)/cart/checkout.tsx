@@ -35,7 +35,7 @@ export default function checkout() {
   }))
 
   const handleCkeckout = async () => {
-   /*  console.log("Checkout") */
+    /*  console.log("Checkout") */
     /*  console.log("data: ", data) */
     /* aquui vai guardar os dados e fará o checkou do produto */
 
@@ -99,11 +99,11 @@ export default function checkout() {
         throw new Error('Dados do checkout não encontrados');
       }
 
-      
+
       const dataCheckout = JSON.parse(dataCheckoutStr);
       /* console.log("resultCreate Order", resultCreateOrder) */
       const idOrder = resultCreateOrder as any
-     
+
       if (resultCreateOrder) {
         const requestRegisterOrder: CreateOrderDetailRequest = {
           orderId: idOrder.id as any,
@@ -120,35 +120,41 @@ export default function checkout() {
           console.log('Detalhes do pedido registrados com sucesso.');
 
           // Registrar os itens do pedido
+          
           if (Array.isArray(dataCheckout.orderItems)) {
+            
+            const idOrderDetail = resultCreateOrder as any;
+
+            console.log("id do datackeckout", dataCheckout.orderItems);
             await Promise.all(dataCheckout.orderItems.map(async (e: any) => {
-              const resultCreateOrderItem = await orderItemService.createOrderItem(e.quantity, e.medicineId, resultCreateOrder.data?.data.id as string);
-              if (resultCreateOrderItem) {
-                console.log(`Item do pedido ${e.medicineId} registrado com sucesso.`);
+              console.log("Quantity ", e.quantity, " Medicine", e.medicineId)
+              const resultCreateOrderItem = await orderItemService.createOrderItem(e.quantity, e.medicineId,idOrderDetail.id);
+              if (resultCreateOrderItem && resultCreateOrderItem != null) {
+                console.log(resultCreateOrderItem)
+                console.log(`Item do pedido ${resultCreateOrderItem} registrado com sucesso.`);
 
               }
               else {
-                console.log("Erro ao cadastrar Order item", resultRegisterOrderDetail.error)
+                console.log("Erro ao cadastrar Order item", resultRegisterOrderDetail)
               }
             }));
           }
 
         } else {
           console.log("Erro ao cadastrar orderDetail", resultRegisterOrderDetail)
-
         }
 
-         /* Terminar e limpar os  */
-         handleClearCart()
-         /* localStorage.removeItem("netFarmaCheckout") */
-         /* 
-          Nota para relembrar, precisamos pegar o valor a ser pago, caso não termina o de fazer a compra e o pedido já está feito 
+        /* Terminar e limpar os  */
+        handleClearCart()
+        /* localStorage.removeItem("netFarmaCheckout") */
+        /* 
+         Nota para relembrar, precisamos pegar o valor a ser pago, caso não termina o de fazer a compra e o pedido já está feito 
 
-         */
-         localStorage.removeItem("netFarmaCartItemsOrder")
-         /* Faltando o toast Ou Alert */
+        */
+        localStorage.removeItem("netFarmaCartItemsOrder")
+        /* Faltando o toast Ou Alert */
         router.replace("/cart/Payment")
-       
+
         console.log("Pedido finalizado com sucesso!")
       }
     }
